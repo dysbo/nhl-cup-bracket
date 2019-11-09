@@ -1,4 +1,4 @@
-[
+export default [
   {
     "standingsType": "regularSeason",
     "league": {

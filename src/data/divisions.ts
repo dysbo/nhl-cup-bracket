@@ -1,4 +1,4 @@
-[
+export default [
   {
     "id": 17,
     "name": "Atlantic",
