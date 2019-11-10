@@ -1,6 +1,8 @@
 import * as T from './types'
 import StatsService from '../service/stats';
 
+const statsService = new StatsService()
+
 const request = (requestType: string) => ({
     type: T.REQUEST, requestType
 })
@@ -13,13 +15,14 @@ const failure = (requestType: string, error: any) => ({
     type: T.FAILURE, requestType, error
 })
 
-export const getRegularSeasonStandings = () => async (dispatch: any) => {
-    const requestType = T.REQUEST_TYPE.REGULAR_SEASON_STANDINGS
+export const getPlayoffMatchups = () => async (dispatch: any) => {
+    const requestType = T.REQUEST_TYPE.PLAYOFF_MATCHUPS
     dispatch(request(requestType))
     try {
-        const payload = await StatsService.getRegularSeasonStandings()
+        const payload = await statsService.getPlayoffMatchups()
         dispatch(success(requestType, payload))
     } catch (error) {
+        console.error(error)
         dispatch(failure(requestType, error))
     }
 }

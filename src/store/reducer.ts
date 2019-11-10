@@ -3,7 +3,7 @@ import * as T from './types'
 
 let pendingRequests: Array<string> = []
 const INITIAL_STATE = {
-    regularSeasonStandings: [],
+    playoffMatchups: [],
     pendingRequests
 }
 
@@ -15,6 +15,10 @@ type Action = {
 }
 
 export default (state = INITIAL_STATE, action: Action): object => {
+    (state as any) = {
+        ...state,
+        requestType: action.requestType        
+    }
     switch (action.type) {
     case (T.REQUEST):
         pendingRequests.push(action.requestType)
@@ -32,11 +36,11 @@ export default (state = INITIAL_STATE, action: Action): object => {
     case (T.SUCCESS):
         pendingRequests = without(pendingRequests, action.requestType)
         switch (action.requestType) {
-        case (T.REQUEST_TYPE.REGULAR_SEASON_STANDINGS):
+        case (T.REQUEST_TYPE.PLAYOFF_MATCHUPS):
             return {
                 ...state,
                 pendingRequests,
-                regularSeasonStandings: action.payload
+                playoffMatchups: action.payload
             }
         default:
             return {

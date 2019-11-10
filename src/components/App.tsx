@@ -4,19 +4,19 @@ import * as actions from '../store/actions'
 import RegularSeasonStanding from '../objectTypes/RegularSeasonStanding';
 
 type propTypes = {
-  getRegularSeasonStandings: any
-  regularSeasonStandings: Array<RegularSeasonStanding>
+  getPlayoffMatchups: any
+  playoffMatchups: Array<RegularSeasonStanding>
 }
 
 class App extends Component {
   componentDidMount (): void {
     // TODO: This is really annoying.  Figure out how to not need this anymore.
-    (this.props as propTypes).getRegularSeasonStandings()
+    (this.props as propTypes).getPlayoffMatchups()
   }
 
   render (): ReactElement {
-    const { regularSeasonStandings } = (this.props as propTypes)
-    console.log(regularSeasonStandings)
+    const { playoffMatchups } = (this.props as propTypes)
+    console.log(playoffMatchups)
     return (
       <div className="container-fluid">
         Hello
@@ -27,7 +27,7 @@ class App extends Component {
 
 const mapStateToProps = (state: any) => state
 const mapDispatchToProps = (dispatch: any) => ({
-  getRegularSeasonStandings: () => dispatch(actions.getRegularSeasonStandings())
+  getPlayoffMatchups: () => dispatch(actions.getPlayoffMatchups())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)
